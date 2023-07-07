@@ -13,6 +13,7 @@ import {
   UserOutlined,
   VideoCameraOutlined,
 } from "@ant-design/icons";
+import Image from "next/image";
 
 // const items = [
 //   UserOutlined,
@@ -67,10 +68,10 @@ export default function GlobalComponent({ children }) {
           }}
         >
           <div
-            className="demo-logo-vertical font-semibold"
+            className="demo-logo-vertical font-semibold items-center justify-center flex"
             style={{ margin: "2rem" }}
           >
-            DSM System
+            <Image src='/android-chrome-192x192.png' height={40} width={40}/>
           </div>
           <Menu
             //   theme="dark"
