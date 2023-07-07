@@ -1,6 +1,5 @@
 import "./globals.css";
 import { Inter } from "next/font/google";
-import { Layout, Menu } from "antd";
 import GlobalComponent from "./components/globalComponent";
 
 const inter = Inter({ subsets: ["latin"] });
