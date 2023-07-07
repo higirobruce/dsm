@@ -15,5 +15,7 @@ module.exports = {
     },
   },
   plugins: [],
-  
+  corePlugins: {
+    preflight: false // <== disable this!
+  },
 }

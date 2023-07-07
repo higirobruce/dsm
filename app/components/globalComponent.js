@@ -93,7 +93,7 @@ export default function GlobalComponent({ children }) {
         >
           <div
             className="demo-logo-vertical font-semibold items-center justify-center flex"
-            style={{ margin: "2rem" }}
+            style={{ marginTop: "1rem", marginLeft:"2rem", marginRight:"2rem" }}
           >
             <Image src="/android-chrome-192x192.png" height={40} width={40} />
           </div>
@@ -104,11 +104,11 @@ export default function GlobalComponent({ children }) {
             defaultSelectedKeys={["/system/distributors"]}
             selectedKeys={[current]}
             items={items}
-            style={{ height: "100%", paddingTop: "0.2rem" }}
+            style={{ height: "100%", paddingTop:"1.5rem" }}
           />
         </Layout.Sider>
 
-        <Layout className="site-layout bg-gray-50" style={{ marginLeft: 200 }}>
+        <Layout className="site-layout bg-gray-50" style={{ marginLeft: 190 }}>
           <Layout.Header
             style={{
               position: "sticky",
