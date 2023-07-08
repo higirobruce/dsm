@@ -4,12 +4,14 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 import {
-  
   TeamOutlined,
   UserOutlined,
   SettingOutlined,
   DesktopOutlined,
-  LogoutOutlined
+  LogoutOutlined,
+  ApartmentOutlined,
+  ShopOutlined,
+  SolutionOutlined,
 } from "@ant-design/icons";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
@@ -70,7 +72,7 @@ const topNavMenuItems = [
   {
     label: "Teller Sales",
     key: "tellerSales",
-    icon: <SettingOutlined />,
+    icon: <SolutionOutlined />,
     children: [
       {
         label: "Daily sales report",
@@ -86,7 +88,7 @@ const topNavMenuItems = [
   {
     label: "Distributors",
     key: "distributors",
-    icon: <TeamOutlined />,
+    icon: <ApartmentOutlined />,
     children: [
       {
         label: "List",
@@ -106,7 +108,7 @@ const topNavMenuItems = [
   {
     label: "Tellers",
     key: "tellers",
-    icon: <TeamOutlined />,
+    icon: <ShopOutlined />,
     children: [
       {
         label: "List",
@@ -222,16 +224,21 @@ export default function GlobalComponent({ children }) {
               top: 0,
               zIndex: 1,
               width: "100%",
-              padding: "0"
-                
-            //   background: "#fff",
+              padding: "0",
+
+              //   background: "#fff",
             }}
-            className='flex flex-row items-center bg-white'
+            className="flex flex-row items-center bg-white"
           >
-            <Image src='/android-chrome-192x192.png' className="mx-5" height={35} width={35} />
-           <Menu
+            <Image
+              src="/android-chrome-192x192.png"
+              className="mx-5"
+              height={35}
+              width={35}
+            />
+            <Menu
               onClick={onClick}
-              className='w-full p-0 m-0'
+              className="w-full p-0 m-0"
               //   selectedKeys={[current]}
               mode="horizontal"
               items={topNavMenuItems}
