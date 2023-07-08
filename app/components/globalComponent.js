@@ -125,7 +125,7 @@ export default function GlobalComponent({ children }) {
         ease: "circOut",
       }}
     >
-      <Layout className="h-screen bg-white">
+      <Layout className="h-screen">
         {/* <Layout.Sider
           style={{
             overflow: "auto",
@@ -165,23 +165,24 @@ export default function GlobalComponent({ children }) {
               top: 0,
               zIndex: 1,
               width: "100%",
-              //   display: "flex",
-              //   alignItems: "center",
-              background: "#fff",
+              padding: "0"
+                
+            //   background: "#fff",
             }}
+            className='flex flex-row items-center bg-white'
           >
-            <div>
-              <Menu
-                onClick={onClick}
-                //   selectedKeys={[current]}
-                mode="horizontal"
-                items={topNavMenuItems}
-              />
-            </div>
+            <Image src='/android-chrome-192x192.png' className="mx-5" height={35} width={35} />
+           <Menu
+              onClick={onClick}
+              className='w-full p-0 m-0'
+              //   selectedKeys={[current]}
+              mode="horizontal"
+              items={topNavMenuItems}
+            />
           </Layout.Header>
 
           <Layout.Content
-            className="m-5"
+            className="my-5 mx-20"
             // style={{ margin: "24px 16px 0", overflow: "initial" }}
           >
             {children}
