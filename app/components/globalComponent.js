@@ -4,18 +4,12 @@ import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 import {
-  AppstoreOutlined,
-  BarChartOutlined,
-  CloudOutlined,
-  ShopOutlined,
+  
   TeamOutlined,
-  UploadOutlined,
   UserOutlined,
-  MailOutlined,
-  VideoCameraOutlined,
   SettingOutlined,
-  MonitorOutlined,
   DesktopOutlined,
+  LogoutOutlined
 } from "@ant-design/icons";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
@@ -87,6 +81,69 @@ const topNavMenuItems = [
         key: "/system/teller-sales/active-branch",
       },
     ],
+  },
+
+  {
+    label: "Distributors",
+    key: "distributors",
+    icon: <TeamOutlined />,
+    children: [
+      {
+        label: "List",
+        key: "/system/distributors",
+      },
+      {
+        label: "Top up",
+        key: "/system/distributors/topup",
+      },
+      {
+        label: "Request Top up",
+        key: "/system/distributors/request-topup",
+      },
+    ],
+  },
+
+  {
+    label: "Tellers",
+    key: "tellers",
+    icon: <TeamOutlined />,
+    children: [
+      {
+        label: "List",
+        key: "/system/tellers",
+      },
+      {
+        label: "Top up",
+        key: "/system/tellers/topup",
+      },
+      {
+        label: "Request Top up",
+        key: "/system/tellers/request-topup",
+      },
+    ],
+  },
+
+  {
+    // key: "username",
+    label: `Administrator`,
+    icon: <UserOutlined />,
+    style: { marginLeft: "auto" },
+    children: [
+      {
+        label: "My Profile",
+        key: "/system/profile",
+      },
+    ],
+    // onClick: logout,
+  },
+
+  {
+    key: "logout",
+    label: "Logout",
+    danger: true,
+    icon: <LogoutOutlined className="text-red-400" />,
+    // style: { marginLeft: "auto" },
+    // onClick: logout,
   },
 ];
 

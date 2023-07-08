@@ -1,10 +1,15 @@
-'use client'
+"use client";
 import { url } from "@/app/page";
-import { Spin, Table } from "antd";
-import {Typography} from "antd";
+import { Spin, Table, message, Empty, Skeleton } from "antd";
+import { Typography } from "antd";
 import React, { useEffect, useState } from "react";
 
-export async function getTellers(setTellers, setLoading, setDataFound) {
+export async function getTellers(
+  setTellers,
+  setLoading,
+  setDataFound,
+  messageApi
+) {
   setLoading(true);
   fetch(`${url}/tellers`, {
     method: "GET",
@@ -16,7 +21,7 @@ export async function getTellers(setTellers, setLoading, setDataFound) {
       if (res.ok) {
         return res.json();
       } else {
-        throw Error(JSON.stringify(res));
+        throw Error(res.statusText);
       }
     })
     .then((res) => {
@@ -25,6 +30,7 @@ export async function getTellers(setTellers, setLoading, setDataFound) {
     })
     .catch((err) => {
       setDataFound(false);
+      messageApi.error(`${err}`);
       console.log(err);
     })
     .finally(() => {
@@ -35,9 +41,10 @@ export default function page() {
   let [tellers, setTellers] = useState([]);
   let [loading, setLoading] = useState(false);
   let [dataFound, setDataFound] = useState(false);
+  let [messageApi, contextHolder] = message.useMessage();
 
   useEffect(() => {
-    getTellers(setTellers, setLoading, setDataFound);
+    getTellers(setTellers, setLoading, setDataFound, messageApi);
   }, []);
 
   let columns = [
@@ -59,10 +66,27 @@ export default function page() {
   ];
   return (
     <div className="flex flex-col h-full">
-      {dataFound && <div>
-        <Typography.Title level={4}>Tellers</Typography.Title>
-        <Table size="middle" columns={columns} dataSource={tellers} className="rounded shadow" /></div>}
-      {loading && <Spin spinning={true} size="small" />}
+      {contextHolder}
+      {dataFound && !loading && (
+        <div>
+          <Typography.Title level={4}>Tellers</Typography.Title>
+          <Table
+            size="middle"
+            columns={columns}
+            dataSource={tellers}
+            className="rounded shadow"
+          />
+        </div>
+      )}
+      {!dataFound && !loading && <Empty />}
+      {loading && (
+        <div>
+          <Skeleton active />
+          <Skeleton active />
+          <Skeleton active />
+        </div>
+      )}
+      '
     </div>
   );
 }
