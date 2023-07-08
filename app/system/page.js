@@ -38,7 +38,7 @@ let items = [
   },
 
   {
-    key: "/system/sales-accessories",
+    key: "/system/subscriptions/sales-accessories",
     label: "Sales accessories",
     icon: <SettingOutlined />,
   },
