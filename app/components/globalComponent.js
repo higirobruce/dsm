@@ -11,7 +11,11 @@ import {
   TeamOutlined,
   UploadOutlined,
   UserOutlined,
+  MailOutlined,
   VideoCameraOutlined,
+  SettingOutlined,
+  MonitorOutlined,
+  DesktopOutlined,
 } from "@ant-design/icons";
 import Image from "next/image";
 import { useRouter, usePathname } from "next/navigation";
@@ -33,16 +37,59 @@ import { useRouter, usePathname } from "next/navigation";
 
 const items = [
   {
-    key: "/system/tellers",
+    key: "/system/system/tellers",
     icon: React.createElement(UserOutlined),
     label: "Tellers",
   },
   {
-    key: "/system/distributors",
+    key: "/system/system/distributors",
     icon: React.createElement(TeamOutlined),
     label: "Distributors",
   },
 ];
+
+const topNavMenuItems = [
+  {
+    label: "Subscriptions",
+    key: "subscriptions",
+    icon: <DesktopOutlined />,
+    children: [
+      {
+        label: "Renew Subscrioption",
+        key: "/system/subscriptions/renew",
+      },
+      {
+        label: "Sales accessories",
+        key: "/system/subscriptions/sales-accessories",
+      },
+      {
+        label: "Subscription record",
+        key: "/system/subscriptions/record",
+      },
+      {
+        label: "New subscriber",
+        key: "/system/subscribers/new",
+      },
+    ],
+  },
+
+  {
+    label: "Teller Sales",
+    key: "tellerSales",
+    icon: <SettingOutlined />,
+    children: [
+      {
+        label: "Daily sales report",
+        key: "/system/teller-sales/report",
+      },
+      {
+        label: "Active branch",
+        key: "/system/teller-sales/active-branch",
+      },
+    ],
+  },
+];
+
 export default function GlobalComponent({ children }) {
   let router = useRouter();
   let pathName = usePathname();
@@ -68,7 +115,6 @@ export default function GlobalComponent({ children }) {
 
   return (
     <motion.div
-    
       initial={{ opacity: 0 }}
       animate={{
         opacity: 1,
@@ -79,8 +125,8 @@ export default function GlobalComponent({ children }) {
         ease: "circOut",
       }}
     >
-      <Layout hasSider className="h-screen">
-        <Layout.Sider
+      <Layout className="h-screen bg-white">
+        {/* <Layout.Sider
           style={{
             overflow: "auto",
             height: "100vh",
@@ -93,7 +139,11 @@ export default function GlobalComponent({ children }) {
         >
           <div
             className="demo-logo-vertical font-semibold items-center justify-center flex"
-            style={{ marginTop: "1rem", marginLeft:"2rem", marginRight:"2rem" }}
+            style={{
+              marginTop: "1rem",
+              marginLeft: "2rem",
+              marginRight: "2rem",
+            }}
           >
             <Image src="/android-chrome-192x192.png" height={40} width={40} />
           </div>
@@ -104,31 +154,40 @@ export default function GlobalComponent({ children }) {
             defaultSelectedKeys={["/system/distributors"]}
             selectedKeys={[current]}
             items={items}
-            style={{ height: "100%", paddingTop:"1.5rem" }}
+            style={{ height: "100%", paddingTop: "1.5rem" }}
           />
-        </Layout.Sider>
+        </Layout.Sider> */}
 
-        <Layout className="site-layout bg-gray-50" style={{ marginLeft: 190 }}>
+        <Layout className="site-layout ">
           <Layout.Header
             style={{
               position: "sticky",
               top: 0,
               zIndex: 1,
               width: "100%",
-              display: "flex",
-              alignItems: "center",
+              //   display: "flex",
+              //   alignItems: "center",
               background: "#fff",
             }}
-          ></Layout.Header>
+          >
+            <div>
+              <Menu
+                onClick={onClick}
+                //   selectedKeys={[current]}
+                mode="horizontal"
+                items={topNavMenuItems}
+              />
+            </div>
+          </Layout.Header>
 
           <Layout.Content
-            style={{ margin: "24px 16px 0", overflow: "initial" }}
-            
+            className="m-5"
+            // style={{ margin: "24px 16px 0", overflow: "initial" }}
           >
             {children}
           </Layout.Content>
 
-          <Layout.Footer style={{ textAlign: "center" }} className="bg-gray-50">
+          <Layout.Footer style={{ textAlign: "center" }} className="">
             DSM System ©2023 MVEND
           </Layout.Footer>
         </Layout>
