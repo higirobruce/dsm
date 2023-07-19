@@ -1,8 +1,11 @@
 "use client";
 import { url } from "@/app/page";
-import { Spin, Table, message, Empty, Skeleton } from "antd";
+import { Spin, Table, message, Empty, Skeleton, Button } from "antd";
 import { Typography } from "antd";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { PlusOutlined } from "@ant-design/icons";
 
 export async function getTellers(
   setTellers,
@@ -42,6 +45,7 @@ export default function page() {
   let [loading, setLoading] = useState(false);
   let [dataFound, setDataFound] = useState(false);
   let [messageApi, contextHolder] = message.useMessage();
+  let router = useRouter()
 
   useEffect(() => {
     getTellers(setTellers, setLoading, setDataFound, messageApi);
@@ -59,6 +63,11 @@ export default function page() {
       key: "full_name",
     },
     {
+      title: "Email address",
+      dataIndex: "email_address",
+      key: "email_address",
+    },
+    {
       title: "Telephone",
       dataIndex: "telephone_number",
       key: "telephone_number",
@@ -69,12 +78,27 @@ export default function page() {
       {contextHolder}
       {dataFound && !loading && (
         <div>
-          <Typography.Title level={4}>Tellers</Typography.Title>
+          <div className="flex flex-row justify-between items-center">
+            <Typography.Title level={4}>Tellers</Typography.Title>
+            <Link href={`/system/tellers/new`}>
+              <Button icon={<PlusOutlined />} type="primary">
+                New Teller
+              </Button>
+            </Link>
+          </div>
           <Table
             size="middle"
             columns={columns}
             dataSource={tellers}
             className="rounded shadow"
+            onRow={(record, rowIndex) => {
+              return {
+                onClick: (event) => {
+                  event.stopPropagation();
+                  router.push(`/system/tellers/${record?.teller_id}`);
+                }, // click row
+              };
+            }}
           />
         </div>
       )}
