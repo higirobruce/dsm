@@ -95,7 +95,10 @@ export default function page() {
             size="middle"
             columns={columns}
             dataSource={distributors}
-            className="rounded shadow"
+            className="rounded shadow bg-white px-2"
+            pagination={{
+              showSizeChanger:false
+            }}
             onRow={(record, rowIndex) => {
               return {
                 onClick: (event) => {
