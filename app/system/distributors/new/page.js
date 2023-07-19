@@ -10,7 +10,7 @@ import {
   Typography,
   message,
 } from "antd";
-import { useParams } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
 import {
   MailOutlined,
@@ -38,8 +38,11 @@ export default function distributor() {
   let [emailAddress, setEmailAddress] = useState(null);
   let [telephoneNumber, setTelephoneNumber] = useState(null);
   let [address, setAddress] = useState(null);
+  let [submiting, setSubmiting] = useState(false)
+  let router = useRouter()
 
   function createDistrubutor() {
+    setSubmiting(true)
     fetch(`${url}/distributors`, {
       method: "POST",
       headers: {
@@ -62,7 +65,10 @@ export default function distributor() {
         messageApi.error(res.statusText);
       }
     }).then(res=>{
-      alert(JSON.stringify(res))
+     
+    }).finally(()=>{
+      router.push('/system/distributors')
+      setSubmiting(false)
     })
   }
   return (
@@ -166,7 +172,7 @@ export default function distributor() {
             />
           </Form.Item>
           <Form.Item className="col-span-4">
-            <Button type="primary" onClick={createDistrubutor}>
+            <Button loading={submiting} type="primary" onClick={createDistrubutor}>
               Submit
             </Button>
           </Form.Item>
