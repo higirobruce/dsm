@@ -1,8 +1,11 @@
 "use client";
 import { url } from "@/app/page";
-import { Spin, Table, message, Skeleton, Empty } from "antd";
+import { Spin, Table, message, Skeleton, Empty, Button } from "antd";
 import { Typography } from "antd";
+import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
+import { PlusOutlined } from "@ant-design/icons";
+import Link from "next/link";
 
 export async function getDistributors(
   setDistributors,
@@ -42,6 +45,7 @@ export default function page() {
   let [loading, setLoading] = useState(false);
   let [dataFound, setDataFound] = useState(false);
   const [messageApi, contextHolder] = message.useMessage();
+  let router = useRouter();
 
   useEffect(() => {
     getDistributors(distributord, setLoading, setDataFound, messageApi);
@@ -78,13 +82,28 @@ export default function page() {
     <div className="flex flex-col h-full">
       {contextHolder}
       {dataFound && !loading && (
-        <div>
-          <Typography.Title level={4}>Distributors</Typography.Title>
+        <div className="flex flex-col space-y-5">
+          <div className="flex flex-row justify-between items-center">
+            <Typography.Title level={4}>Distributors</Typography.Title>
+            <Link href={`/system/distributors/new`}>
+              <Button icon={<PlusOutlined />} type="primary">
+                New Distributor
+              </Button>
+            </Link>
+          </div>
           <Table
             size="middle"
             columns={columns}
             dataSource={distributors}
             className="rounded shadow"
+            onRow={(record, rowIndex) => {
+              return {
+                onClick: (event) => {
+                  event.stopPropagation();
+                  router.push(`/system/distributors/${record?.distributor_id}`);
+                }, // click row
+              };
+            }}
           />
         </div>
       )}
